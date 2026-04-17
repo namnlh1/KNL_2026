@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Ôn luyện KNL 2026</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div id="home-screen">
+            <header class="main-header">
+                <h1>Hệ thống Ôn luyện KNL 2026</h1>
+                <p>Chọn bài thi và chế độ phù hợp để bắt đầu</p>
+            </header>
+            <div id="exam-list" class="grid-container"></div>
+        </div>
+
+        <div id="quiz-screen" class="hidden">
+            <div class="sticky-header">
+                <div class="header-content">
+                    <h2 id="current-exam-name">Tên bài thi</h2>
+                    <div id="exam-stats"></div>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-outline" onclick="confirmExit()">Thoát</button>
+                    <button id="submit-btn" class="btn-primary" onclick="submitExam()">Nộp bài & Chấm điểm</button>
+                </div>
+            </div>
+
+            <div class="quiz-container">
+                <div id="questions-wrapper"></div>
+            </div>
+        </div>
+    </div>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
