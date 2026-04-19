@@ -2,16 +2,17 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Hệ thống Ôn luyện KNL 2026</title>
     <link rel="stylesheet" href="style.css">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 </head>
 <body>
     <div id="app">
         <div id="home-screen">
             <header class="main-header">
                 <h1>Hệ thống Ôn luyện KNL 2026</h1>
-                <p>Chọn bài thi và chế độ phù hợp để bắt đầu</p>
+                <p>Chọn bài thi để bắt đầu ôn luyện</p>
             </header>
             <div id="exam-list" class="grid-container"></div>
         </div>
@@ -27,7 +28,6 @@
                     <button id="submit-btn" class="btn-primary" onclick="submitExam()">Nộp bài & Chấm điểm</button>
                 </div>
             </div>
-
             <div class="quiz-container">
                 <div id="questions-wrapper"></div>
             </div>

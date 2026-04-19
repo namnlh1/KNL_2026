@@ -1,66 +1,168 @@
 :root {
     --primary: #2563eb;
+    --primary-dark: #1d4ed8;
     --success: #16a34a;
     --danger: #dc2626;
     --text-main: #1f2937;
-    --bg-body: #f1f5f9;
+    --text-muted: #64748b;
+    --bg-body: #f8fafc;
     --white: #ffffff;
     --border: #e2e8f0;
 }
 
-body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-body); color: var(--text-main); margin: 0; }
+* { box-sizing: border-box; }
+
+body { 
+    font-family: 'Inter', -apple-system, system-ui, sans-serif; 
+    background: var(--bg-body); 
+    color: var(--text-main); 
+    margin: 0; 
+    -webkit-tap-highlight-color: transparent;
+}
+
 .hidden { display: none !important; }
 
-/* Home Screen */
-.main-header { text-align: center; padding: 40px 20px; background: var(--white); border-bottom: 1px solid var(--border); }
-.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; padding: 40px; }
-.exam-card { background: var(--white); border-radius: 16px; padding: 24px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+/* --- TRANG CHỦ --- */
+.main-header { 
+    text-align: center; 
+    padding: 50px 20px; 
+    background: var(--white); 
+    border-bottom: 1px solid var(--border);
+}
 
-.card-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 15px; }
-.btn-mode { width: 100%; padding: 12px; border-radius: 8px; font-weight: 600; cursor: pointer; border: 1px solid transparent; text-align: left; }
+.grid-container { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+    gap: 20px; 
+    padding: 30px 20px; 
+    max-width: 1200px; 
+    margin: 0 auto;
+}
+
+.exam-card { 
+    background: var(--white); 
+    border-radius: 16px; 
+    padding: 24px; 
+    border: 1px solid var(--border); 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.btn-mode { 
+    width: 100%; padding: 14px; border-radius: 12px; font-weight: 600; 
+    cursor: pointer; border: 1.5px solid transparent; text-align: left; transition: 0.2s;
+}
+
 .btn-standard { background: var(--primary); color: white; }
 .btn-mini { background: #f0f9ff; color: #0369a1; border-color: #bae6fd; }
 .btn-full { background: #fdf2f8; color: #9d174d; border-color: #fbcfe8; }
+.btn-mode:active { transform: scale(0.97); }
 
-/* Quiz Layout */
-.sticky-header { position: sticky; top: 0; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); z-index: 100; }
-.quiz-container { max-width: 1300px; margin: 0 auto; padding: 30px 20px; }
-
-#questions-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
-    gap: 24px; /* Tăng khoảng cách giữa các câu */
+/* --- QUIZ SCREEN HEADER --- */
+.sticky-header { 
+    position: sticky; top: 0; 
+    background: rgba(255, 255, 255, 0.9); 
+    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; 
+    border-bottom: 1px solid var(--border); z-index: 1000;
 }
 
-/* Question Card Fix */
+.btn-primary { 
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white; border: none; padding: 10px 18px; border-radius: 10px; 
+    font-weight: 700; cursor: pointer; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+}
+
+.btn-outline { 
+    background: #fff; border: 1.5px solid var(--border); color: var(--text-muted); 
+    padding: 10px 16px; border-radius: 10px; font-weight: 600; cursor: pointer;
+}
+
+/* --- QUESTION CARDS --- */
+.quiz-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+#questions-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 25px; }
+
 .question-card { 
     background: var(--white); 
-    padding: 24px; 
-    border-radius: 12px; 
+    padding: 0; /* Xóa padding card để header ôm sát mép */
+    border-radius: 16px; 
     border: 1px solid var(--border); 
-    border-left: 5px solid var(--primary);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    position: relative;
-    overflow: hidden; /* Đảm bảo nội dung không tràn */
 }
 
-.question-text { font-size: 1.05rem; font-weight: 600; margin-bottom: 15px; line-height: 1.5; }
-.ans-count { color: var(--primary); font-size: 0.85rem; font-weight: 700; margin-left: 8px; background: #eff6ff; padding: 2px 8px; border-radius: 4px; }
+/* Tách biệt phần tiêu đề câu hỏi */
+.question-header {
+    background: #f8fafc; /* Màu nền nhẹ cho câu hỏi */
+    padding: 20px;
+    border-bottom: 1px solid #edf2f7;
+    position: relative;
+}
 
-.options-container { margin-bottom: 20px; flex-grow: 1; } /* Đẩy footer xuống dưới */
+.q-number {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+}
 
-.option-item { display: block; padding: 12px 15px; border: 1px solid var(--border); margin-bottom: 8px; border-radius: 8px; cursor: pointer; transition: 0.2s; font-size: 0.95rem; }
-.option-item.selected { background: #eff6ff; border-color: var(--primary); color: var(--primary); font-weight: 500; }
-.option-item.correct { background: #dcfce7 !important; border-color: var(--success) !important; color: #166534; font-weight: 600; }
+.question-text { 
+    font-size: 1.05rem; 
+    font-weight: 700; 
+    color: #0f172a; 
+    line-height: 1.5;
+}
+
+.ans-count { 
+    display: inline-block;
+    margin-top: 10px;
+    color: #4f46e5; 
+    font-size: 0.75rem; 
+    font-weight: 700; 
+    background: #e0e7ff; 
+    padding: 2px 8px; 
+    border-radius: 6px; 
+}
+
+/* Tạo khoảng cách cho danh sách đáp án */
+.options-container {
+    padding: 20px; /* Thêm padding ở đây để tạo khoảng trống với header */
+}
+
+.option-item { 
+    padding: 14px 16px; 
+    border: 1.5px solid var(--border); 
+    margin-bottom: 12px; /* Tăng khoảng cách giữa các lựa chọn */
+    border-radius: 12px; 
+    cursor: pointer; 
+    font-size: 0.95rem; 
+    transition: all 0.2s;
+}
+
+.option-item:last-child { margin-bottom: 0; }
+
+.option-item.selected { background: #eff6ff; border-color: var(--primary); color: var(--primary); font-weight: 600; }
+.option-item.correct { background: #dcfce7 !important; border-color: var(--success) !important; color: #166534; font-weight: 700; }
 .option-item.wrong { background: #fee2e2 !important; border-color: var(--danger) !important; color: #991b1b; }
 
-.card-footer { border-top: 1px solid #f1f5f9; padding-top: 15px; margin-top: auto; }
+.user-result-info { 
+    margin-top: 15px; padding: 12px; background: #fff1f2; border-radius: 10px; 
+    font-size: 0.85rem; color: #991b1b; border-left: 4px solid var(--danger);
+}
 
-.hint-btn { background: #f1f5f9; border: 1px solid #cbd5e1; color: #475569; font-size: 13px; padding: 8px 15px; border-radius: 6px; font-weight: 500; cursor: pointer; }
-.hint-box { display: none; margin-top: 10px; padding: 12px; background: #fffbeb; border-radius: 6px; font-size: 14px; border: 1px dashed #f59e0b; }
+.card-footer { 
+    padding: 15px 20px 20px; 
+    border-top: 1px solid #f1f5f9; 
+}
 
-.btn-primary { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; }
-.btn-outline { background: none; border: 1px solid #d1d5db; color: #374151; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+.hint-btn { background: #f1f5f9; border: none; color: #475569; padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; }
+.hint-box { margin-top: 12px; padding: 12px; background: #fffbeb; border-radius: 10px; font-size: 14px; border: 1px dashed #f59e0b; color: #92400e; }
 
-@media (max-width: 1000px) { #questions-wrapper { grid-template-columns: 1fr; } }
+@media (max-width: 600px) {
+    .sticky-header { padding: 10px 15px; flex-direction: column; gap: 8px; text-align: center; }
+    #questions-wrapper { grid-template-columns: 1fr; }
+    .grid-container { grid-template-columns: 1fr; }
+}
